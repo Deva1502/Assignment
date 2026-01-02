@@ -1,0 +1,46 @@
+datasource db {
+  provider = "postgresql"
+  url      = "postgres://9ebada0c4e9b3bd6545edda68d4cf14e5824403530d439b89fe60e3227cf145d:sk_rIu6VpkjRw126TEydJHHG@db.prisma.io:5432/postgres?sslmode=require"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "windows"]
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  favorites Favorite[]
+}
+
+model Game {
+  id          Int      @id @default(autoincrement())
+  type        GameType
+  name        String
+  provider    String?
+  sport       String?
+  category    String?
+  teamA       String?
+  teamB       String?
+  startTime   DateTime?
+  favorites   Favorite[]
+}
+
+model Favorite {
+  id        Int  @id @default(autoincrement())
+  userId    Int
+  gameId    Int
+  user      User @relation(fields: [userId], references: [id])
+  game      Game @relation(fields: [gameId], references: [id])
+  
+  @@unique([userId, gameId])
+}
+
+enum GameType {
+  SPORTS
+  CASINO
+}
