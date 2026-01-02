@@ -10,6 +10,10 @@ const authRoutes = require('./routes/auth');
 const gameRoutes = require('./routes/games');
 const favoriteRoutes = require('./routes/favorites');
 
+mongoose.connect(process.env.MONGO_URI || process.env.DATABASE_URL)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
 app.use(cors());
 app.use(express.json());
 
