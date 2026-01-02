@@ -146,12 +146,5 @@ npm run dev
 │   └── seed.js            # Database Seeder
 ```
 
----
 
-## 📸 Screenshots
-
-*(Add your screenshots here)*
-
----
-
-Made with ❤️ by [Your Name]
+Made with ❤️ by Devansh
